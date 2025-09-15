@@ -1,89 +1,176 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pyata Tarun — Aspiring Software Engineer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarun Portfolio</title>
+
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <style>
-    /* (Styles from your file remain unchanged) */
+    /* ===== BASE STYLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; transition: background 0.3s, color 0.3s; }
+    section { padding: 80px 20px; max-width: 900px; margin: auto; scroll-margin-top: 80px; }
+
+    /* ===== NAVBAR ===== */
+    header { position: fixed; top: 0; width: 100%; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
+    .navbar { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; }
+    .logo { font-size: 1.5rem; font-weight: bold; color: #0077ff; }
+    .logo span { color: #333; }
+
+    .nav-links { list-style: none; display: flex; gap: 25px; }
+    .nav-links li { display: inline; }
+    .nav-link { text-decoration: none; font-size: 1rem; color: #333; font-weight: 500; transition: color 0.3s; }
+    .nav-link:hover { color: #0077ff; }
+    .nav-link.active { color: #0077ff; font-weight: bold; border-bottom: 2px solid #0077ff; }
+
+    /* Hamburger */
+    .hamburger { display: none; font-size: 1.8rem; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links { 
+        position: absolute; top: 60px; right: 0; background: #fff; flex-direction: column; width: 200px;
+        text-align: right; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: none;
+      }
+      .nav-links.show { display: flex; }
+      .hamburger { display: block; }
+    }
+
+    /* ===== PROJECT CARDS ===== */
+    .project-card {
+      background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+    .project-card h3 { margin-bottom: 10px; color: #333; }
+    .project-card a { color: #0077ff; text-decoration: none; font-weight: bold; }
+    .project-card a:hover { text-decoration: underline; }
+
+    /* ===== DARK MODE ===== */
+    body.dark-mode { background: #121212; color: #f0f0f0; }
+    body.dark-mode header { background: #1f1f1f; }
+    body.dark-mode .project-card { background: #1e1e1e; color: #f0f0f0; box-shadow: 0 4px 12px rgba(255,255,255,0.1); }
+    body.dark-mode .nav-link { color: #ddd; }
+    body.dark-mode .nav-link.active { color: #66aaff; border-bottom: 2px solid #66aaff; }
+    body.dark-mode .logo { color: #66aaff; }
+
+    /* Dark toggle button */
+    .dark-toggle { font-size: 1.5rem; cursor: pointer; margin-left: 20px; transition: transform 0.3s; }
+    .dark-toggle:hover { transform: rotate(20deg); }
   </style>
 </head>
 <body>
-  <button class="toggle-dark" onclick="document.body.classList.toggle('dark')">🌙 Toggle Dark Mode</button>
 
-  <main class="container" role="main">
-    <header>
-      <img src="21R95A1204.jpeg" alt="Pyata Tarun" class="profile">
-      <h1>PYATA TARUN</h1>
-      <div class="typing" id="typing"></div>
-      <div class="contact">
-        ✉ <a href="mailto:petatarun17@gmail.com">petatarun17@gmail.com</a> &nbsp;|&nbsp; 
-        <a href="https://linkedin.com/in/peta-tarun-17t07" target="_blank" rel="noopener">LinkedIn</a> &nbsp;|&nbsp; 
-        <a href="https://github.com/PetaTarun" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </header>
-
-    <section class="summary">
-      <h2>SUMMARY</h2>
-      <p>Creative and detail-oriented Software Engineer skilled in Java, SQL, and full-stack development. Experienced in building scalable applications, debugging, and applying OOP principles. Strong problem-solving ability and eager to contribute to innovative software solutions.</p>
-    </section>
-
-    <section class="skills">
-      <h2>SKILLS</h2>
-      <ul class="skills">
-        <li>Java (Advanced)</li>
-        <li>SQL / MySQL</li>
-        <li>JSP / Servlets</li>
-        <li>JavaFX</li>
-        <li>HTML / CSS / PHP</li>
-        <li>JavaScript</li>
-        <li>Git</li>
-        <li>Data Structures / OOP</li>
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Tarun<span>.</span></div>
+      <div class="hamburger" id="hamburger">☰</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link active">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
-      <div class="skill-bars">
-        <div>Java</div>
-        <div class="bar"><span style="width:90%"></span></div>
-        <div>SQL</div>
-        <div class="bar"><span style="width:80%"></span></div>
-        <div>JavaScript</div>
-        <div class="bar"><span style="width:75%"></span></div>
-      </div>
-    </section>
+      <div class="dark-toggle" id="dark-toggle">🌙</div>
+    </nav>
+  </header>
 
-    <section class="projects">
-      <h2>PROJECTS</h2>
-      <div class="project">
-        <strong>Secure Cloud Data Sharing Using Proxy Re-Encryption</strong>
-        <p>Secure cloud-sharing application using Java, JSP, Servlets, MySQL. GitHub: <a href="https://github.com/PetaTarun/Secure-Cloud-Data-Sharing-Using-Proxy-Re-Encryption" target="_blank">View Project</a></p>
-      </div>
-      <div class="project">
-        <strong>Hospital Management System</strong>
-        <p>Java & MySQL-based system for managing patients and appointments. GitHub: <a href="https://github.com/PetaTarun/HospitalManagementSystem" target="_blank">View Project</a></p>
-      </div>
-      <div class="project">
-        <strong>Snake Game</strong>
-        <p>Interactive game developed in Java with JavaFX. GitHub: <a href="https://github.com/PetaTarun/Snakegame" target="_blank">View Project</a></p>
-      </div>
-    </section>
+  <!-- ===== ABOUT ===== -->
+  <section id="about" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>I’m an aspiring Software Engineer passionate about designing scalable applications and solving real-world problems through clean, efficient code. Skilled in Java, SQL, and full-stack development, I enjoy transforming complex ideas into simple, user-friendly solutions.</p>
+  </section>
 
-    <section class="education">
-      <h2>EDUCATION</h2>
-      <p><strong>B.Tech, Information Technology</strong> | Teegala Krishna Reddy Engg. College | 2021–2024 | CGPA: 7.5</p>
-      <p><strong>Diploma, Electrical & Electronics</strong> | TKREC | 2018–2021 | CGPA: 7.65</p>
-      <p><strong>SSC</strong> | Vedic Visista The School | 2017–2018 | CGPA: 7.5</p>
-    </section>
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" data-aos="fade-right">
+    <h2>Skills</h2>
+    <ul>
+      <li><strong>Languages:</strong> Java, SQL, HTML, CSS, JavaScript</li>
+      <li><strong>Frameworks & Tools:</strong> JSP, Servlets, JavaFX, JDBC</li>
+      <li><strong>Databases:</strong> MySQL</li>
+      <li><strong>Core Concepts:</strong> OOP, Data Structures & Algorithms, DBMS</li>
+      <li><strong>Version Control:</strong> Git, GitHub</li>
+    </ul>
+  </section>
 
-    <section class="certs">
-      <h2>TRAINING & CERTIFICATIONS</h2>
-      <p>Java Full Stack Developer (TNS Indian Foundation, sponsored by J.P. Morgan)<br>
-      Web Development (Internshala)<br>
-      Career Essentials in Software Development (Microsoft & LinkedIn)<br>
-      <a href="https://github.com/PetaTarun/C2TC_corejava" target="_blank">C2TC Core Java</a></p>
-    </section>
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" data-aos="zoom-in">
+    <h2>Projects</h2>
+    <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+      <h3>Secure Cloud Data Sharing</h3>
+      <p>Built a secure file-sharing platform using Java, JSP, Servlets, and MySQL. Implemented AES encryption and role-based authentication.</p>
+      <a href="https://github.com/petatarun" target="_blank">🔗 GitHub Repo</a>
+    </div>
+    <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+      <h3>Hospital Management System</h3>
+      <p>JavaFX desktop app with MySQL backend. Automated patient records, billing, and appointments, improving efficiency by 40%.</p>
+      <a href="https://github.com/petatarun" target="_blank">🔗 GitHub Repo</a>
+    </div>
+    <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+      <h3>Snake Game</h3>
+      <p>Interactive desktop game built in JavaFX with scoring system and multiple levels.</p>
+      <a href="https://github.com/petatarun" target="_blank">🔗 GitHub Repo</a>
+    </div>
+  </section>
 
-    <footer>
-      Languages: English | Telugu | Hindi
-    </footer>
-  </main>
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" data-aos="fade-left">
+    <h2>Contact</h2>
+    <p>📞 +91 6303878721</p>
+    <p>✉️ <a href="mailto:tarunpetta04@gmail.com">tarunpetta04@gmail.com</a></p>
+    <p>🔗 <a href="https://linkedin.com/in/your-link" target="_blank">LinkedIn</a></p>
+    <p>💻 <a href="https://github.com/petatarun" target="_blank">GitHub</a></p>
+  </section>
+
+  <!-- AOS & Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Mobile Menu Toggle
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+    hamburger.addEventListener("click", () => navLinks.classList.toggle("show"));
+
+    // Active Link Highlight
+    const sections = document.querySelectorAll("section");
+    const links = document.querySelectorAll(".nav-link");
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const top = section.offsetTop - 90;
+        const height = section.clientHeight;
+        if (pageYOffset >= top && pageYOffset < top + height) current = section.id;
+      });
+      links.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").includes(current)) link.classList.add("active");
+      });
+    });
+
+    // Close mobile menu on link click
+    links.forEach(link => link.addEventListener("click", () => navLinks.classList.remove("show")));
+
+    // Dark Mode Toggle
+    const toggle = document.getElementById("dark-toggle");
+    const body = document.body;
+    if (localStorage.getItem("dark-mode") === "enabled") {
+      body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+    }
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      if (body.classList.contains("dark-mode")) {
+        toggle.textContent = "☀️";
+        localStorage.setItem("dark-mode", "enabled");
+      } else {
+        toggle.textContent = "🌙";
+        localStorage.setItem("dark-mode", "disabled");
+      }
+    });
+  </script>
 </body>
 </html>
